@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Clase que representa una solicitud de usuario.
+ */
 @Getter
 @Setter
 @AllArgsConstructor

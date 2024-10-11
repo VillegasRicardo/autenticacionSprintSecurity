@@ -14,10 +14,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.*;
 
+/**
+ * Clase que representa el modelo de usuario.
+ */
 @Entity
 @Getter
 @Setter
@@ -35,16 +36,16 @@ public class UserModel implements UserDetails
 	@Column(name="id", updatable = false, nullable = false, unique = true)
 	private Long id;
 	
-	@Column(name="email", updatable = true, nullable = false, unique = false)
+	@Column(name="email", updatable = true, nullable = true, unique = false)
 	private String email;
 	
-	@Column(name="password", updatable = true, nullable = false, unique = false)
+	@Column(name="password", updatable = true, nullable = true, unique = false)
 	private String password;
 	
-	@Column(name="name", updatable = true, nullable = false, unique = false)
+	@Column(name="name", updatable = true, nullable = true, unique = false)
 	private String name;
 	
-	@Column(name="role", updatable = true, nullable = false, unique = false)
+	@Column(name="role", updatable = true, nullable = true, unique = false)
 	private String role;
 
 	@Override
@@ -52,16 +53,19 @@ public class UserModel implements UserDetails
 		return List.of(new SimpleGrantedAuthority(role));
 	}
 
+	/**
+     * Obtiene el nombre de usuario (correo electrónico) del usuario.
+     * @return el correo electrónico del usuario.
+     */
 	@Override
 	public String getUsername() {
 		return email;
 	}
 	
 	/**
-	 * Indicates whether the user's account has expired. An expired account cannot be
-	 * authenticated.
-	 * @return <code>true</code> if the user's account is valid (ie non-expired),
-	 * <code>false</code> if no longer valid (ie expired)
+	 * Indica si la cuenta del usuario ha expirado. Una cuenta expirada no puede ser autenticada.
+	 * @return <code>true</code> si la cuenta del usuario es válida (es decir, no ha expirado),
+	 *         <code>false</code> si ya no es válida (es decir, ha expirado).
 	 */
 	@Override
 	public boolean isAccountNonExpired() {
@@ -69,9 +73,8 @@ public class UserModel implements UserDetails
 	}
 
 	/**
-	 * Indicates whether the user is locked or unlocked. A locked user cannot be
-	 * authenticated.
-	 * @return <code>true</code> if the user is not locked, <code>false</code> otherwise
+	 * Indica si el usuario está bloqueado o desbloqueado. Un usuario bloqueado no puede ser autenticado.
+	 * @return <code>true</code> si el usuario no está bloqueado, <code>false</code> en caso contrario.
 	 */
 	@Override
 	public boolean isAccountNonLocked() {
@@ -79,10 +82,10 @@ public class UserModel implements UserDetails
 	}
 
 	/**
-	 * Indicates whether the user's credentials (password) has expired. Expired
-	 * credentials prevent authentication.
-	 * @return <code>true</code> if the user's credentials are valid (ie non-expired),
-	 * <code>false</code> if no longer valid (ie expired)
+	 * Indica si las credenciales del usuario (contraseña) han expirado. Las credenciales expiradas
+	 * impiden la autenticación.
+	 * @return <code>true</code> si las credenciales del usuario son válidas (es decir, no han expirado),
+	 *         <code>false</code> si ya no son válidas (es decir, han expirado).
 	 */
 	@Override
 	public boolean isCredentialsNonExpired() {
@@ -90,14 +93,13 @@ public class UserModel implements UserDetails
 	}
 
 	/**
-	 * Indicates whether the user is enabled or disabled. A disabled user cannot be
-	 * authenticated.
-	 * @return <code>true</code> if the user is enabled, <code>false</code> otherwise
+	 * Indica si el usuario está habilitado o deshabilitado. Un usuario deshabilitado no puede ser
+	 * autenticado.
+	 * @return <code>true</code> si el usuario está habilitado, <code>false</code> en caso contrario.
 	 */
 	@Override
 	public boolean isEnabled() {
 		return true;
 	}
-	
 	
 }
