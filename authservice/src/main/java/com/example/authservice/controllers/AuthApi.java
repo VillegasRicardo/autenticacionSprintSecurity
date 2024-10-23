@@ -36,3 +36,4 @@ public interface AuthApi {
 	ResponseEntity<String> getUser(@RequestAttribute(name = "X-User-Id") String userId);
 	
 }
+
